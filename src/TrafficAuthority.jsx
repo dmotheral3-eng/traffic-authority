@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 
 /**
  * Traffic Authority — single-file React component
@@ -1746,6 +1747,7 @@ export default function TrafficAuthority() {
           </div>
         </div>
       </footer>
+      <Analytics />
     </div>
   );
 }
