@@ -2,6 +2,32 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- Centripetal Inbound Funnel tracker -->
+    <script>
+      (function () {
+          var SITE_SLUG = "traffic";
+          var ENDPOINT  = "https://ulzyudbqkmjistymlqwg.supabase.co/rest/v1/rpc/fn_ingest_lead_event";
+          var ANON_KEY  = "sb_publishable_BrUeC0HYQJXMufuFrosudA_q2ni_r_C";
+          function send(t, ex) {
+                var b = Object.assign({
+                        p_site_slug: SITE_SLUG, p_event_type: t, p_source: "ga4",
+                        p_page_path: location.pathname, p_page_title: document.title,
+                        p_visitor_id: localStorage.getItem("cf_vid") || (function(){var v="v_"+Math.random().toString(36).slice(2);localStorage.setItem("cf_vid",v);return v;})()
+                }, ex || {});
+                fetch(ENDPOINT, {method:"POST", headers:{"Content-Type":"application/json","apikey":ANON_KEY}, body:JSON.stringify(b), keepalive:true}).catch(function(){});
+          }
+          send("pageview");
+          var _push = history.pushState;
+          history.pushState = function(){ _push.apply(this, arguments); send("pageview"); };
+          window.addEventListener("popstate", function(){ send("pageview"); });
+          document.addEventListener("submit", function(e){
+                if (e.target && e.target.hasAttribute("data-funnel-form")) {
+                        var fd = new FormData(e.target);
+                        send("form_fill", {p_source:"form", p_person_email:fd.get("email")||null, p_person_name:fd.get("name")||null, p_company:fd.get("company")||null});
+                }
+          }, true);
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0e0e10" />
     <title>Traffic Authority — ITS Protocol Translation</title>
