@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIMPL Protocol Translation — Traffic Authority</title>
+<meta name="description" content="Seyond SIMPL JSON in. Legacy DOT protocols out. Live translations from the best LiDAR platform in ITS to the center software agencies already run — Z1 binary and RTMS serial carrying production traffic today, NTCIP 1209 ready.">
+<meta property="og:title" content="Traffic Authority — SIMPL Protocol Translation">
+<meta property="og:description" content="SIMPL JSON in. Legacy DOT protocols out. Live in production today.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0e0e10">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-86S8R140PV"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-86S8R140PV');</script>
+<!-- RB2B -->
+<script>!function(){var reb2b=window.reb2b=window.reb2b||[];if(reb2b.invoked)return;reb2b.invoked=true;reb2b.methods=["identify","collect"];reb2b.factory=function(method){return function(){var args=Array.prototype.slice.call(arguments);args.unshift(method);reb2b.push(args);return reb2b;};};for(var i=0;i<reb2b.methods.length;i++){var key=reb2b.methods[i];reb2b[key]=reb2b.factory(key);}reb2b.load=function(key){var script=document.createElement("script");script.type="text/javascript";script.async=true;script.src="https://b2bjsstore.s3.us-west-2.amazonaws.com/b/"+key+"/"+key+".js.gz";var first=document.getElementsByTagName("script")[0];first.parentNode.insertBefore(script,first);};reb2b.SNIPPET_VERSION="1.0.1";reb2b.load("46DJ4HGGJM61");}();</script>
+<style>
+:root{--ink:#0e0e10;--paper:#f4f1ea;--yellow:#ffd100;--rule:#d8d3c6;--mut:#6b675d;--green:#1d6b3c}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'IBM Plex Serif',serif;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+a{color:var(--ink)}
+header{border-bottom:1px solid var(--ink);background:var(--paper);position:sticky;top:0;z-index:50}
+.hin{max-width:1060px;margin:0 auto;padding:0 24px;height:58px;display:flex;align-items:center;justify-content:space-between}
+.wm{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:17px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none}
+.wm b{background:var(--yellow);padding:1px 6px}
+.hl{font-family:'IBM Plex Mono',monospace;font-size:12px;text-decoration:none;border:1px solid var(--ink);padding:8px 14px}
+.hl:hover{background:var(--ink);color:var(--paper)}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut)}
+h1{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(34px,5.4vw,62px);line-height:1.02;letter-spacing:.01em;margin-top:14px}
+h1 .y{background:var(--yellow);padding:0 8px}
+h2{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(23px,3vw,34px);line-height:1.08;margin-top:12px}
+.lead{font-size:clamp(16px,1.9vw,19px);max-width:64ch;margin-top:18px}
+section{padding:72px 0;border-top:1px solid var(--rule)}
+section.hero{border-top:none;padding:84px 0 64px}
+.statrow{display:flex;flex-wrap:wrap;margin-top:38px;border:1px solid var(--ink)}
+.stat{flex:1;min-width:160px;padding:16px 18px;border-right:1px solid var(--ink)}
+.stat:last-child{border-right:none}
+.stat b{display:block;font-family:'IBM Plex Sans Condensed',sans-serif;font-size:clamp(22px,2.6vw,30px);font-weight:700;line-height:1}
+.stat span{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);display:block;margin-top:6px}
+table.cat{width:100%;border-collapse:collapse;margin-top:30px;font-size:14.5px;min-width:720px}
+.catwrap{overflow-x:auto;margin-top:0}
+table.cat th{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-align:left;padding:12px 14px;border-bottom:1px solid var(--ink);color:var(--mut);font-weight:500}
+table.cat td{padding:14px;border-bottom:1px solid var(--rule);vertical-align:top}
+table.cat td.code{font-family:'IBM Plex Mono',monospace;font-weight:600;white-space:nowrap}
+.chip{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border:1px solid var(--ink);white-space:nowrap}
+.chip.live{background:var(--yellow);border-color:var(--ink);font-weight:600}
+.chip.ready{background:#e4efe2;border-color:var(--green);color:var(--green)}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0;border:1px solid var(--ink);margin-top:34px}
+.tcell{padding:26px;border-right:1px solid var(--ink)}
+.tcell:last-child{border-right:none}
+@media (max-width:920px){.tcell{border-right:none;border-bottom:1px solid var(--ink)}.tcell:last-child{border-bottom:none}}
+.tcell .tn{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:20px}
+.tcell .tt{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;background:var(--yellow);display:inline-block;padding:2px 8px;margin-top:8px}
+.tcell p{font-size:14px;margin-top:12px}
+.tcell ul{list-style:none;margin-top:12px}
+.tcell li{font-family:'IBM Plex Mono',monospace;font-size:12px;padding:5px 0;border-top:1px solid var(--rule)}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:26px;margin-top:34px}
+.hcell .hn{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mut)}
+.hcell .ht{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:18px;margin-top:6px}
+.hcell p{font-size:14px;margin-top:8px}
+.certs{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.cert{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;border:1px solid var(--ink);padding:5px 11px}
+.cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:15px;letter-spacing:.04em;text-decoration:none;padding:14px 26px;border:1px solid var(--ink)}
+.btn.primary{background:var(--yellow)}
+.btn:hover{background:var(--ink);color:var(--paper)}
+footer{border-top:1px solid var(--ink);padding:34px 0 46px}
+.fin{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mut)}
+.note{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mut);margin-top:16px}
+</style>
+</head>
+<body>
+
+<header><div class="hin">
+  <a class="wm" href="/">TRAFFIC <b>AUTHORITY</b></a>
+  <a class="hl" href="/partners.html">FULL CATALOG &rarr;</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <div class="eyebrow">LiDAR &middot; Seyond SIMPL &middot; protocol translation</div>
+  <h1>SIMPL JSON in.<br><span class="y">Legacy DOT protocols out.</span></h1>
+  <p class="lead">SIMPL is the best LiDAR platform in ITS &mdash; and the agencies it should be winning run center software written before solid-state LiDAR existed. We operate the translation between them: SIMPL's stream on the left of every row, the protocol the agency's TMC actually speaks on the right. Two of those rows are carrying live production traffic today.</p>
+  <div class="statrow">
+    <div class="stat"><b>2</b><span>SIMPL translations live</span></div>
+    <div class="stat"><b>1</b><span>production-ready (NTCIP 1209)</span></div>
+    <div class="stat"><b>2</b><span>catalogued, buildable on contract</span></div>
+    <div class="stat"><b>Nationwide</b><span>via certified prime</span></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">The rows</div>
+  <h2>Every translation starts with your stream.</h2>
+  <div class="catwrap"><table class="cat">
+    <thead><tr><th>From</th><th>To</th><th>Where it lands</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td class="code">SIMPL JSON</td><td class="code">Z1 HD Binary</td><td>TxDOT freeway + intersection detection &mdash; SWRI polling</td><td><span class="chip live">LIVE</span></td></tr>
+      <tr><td class="code">SIMPL JSON</td><td class="code">RTMS G4 Serial</td><td>Legacy cabinet controllers &mdash; volume, occupancy, speed</td><td><span class="chip live">LIVE</span></td></tr>
+      <tr><td class="code">SIMPL JSON</td><td class="code">NTCIP 1209</td><td>Standard vehicle-detection objects &mdash; any conformant ATMS, any state</td><td><span class="chip ready">PRODUCTION&#8209;READY</span></td></tr>
+      <tr><td class="code">SIMPL JSON</td><td class="code">AB3418</td><td>California signal controller protocol</td><td><span class="chip">CATALOGUED</span></td></tr>
+      <tr><td class="code">SIMPL JSON</td><td class="code">NTCIP C2C</td><td>Center-to-center TMC data exchange</td><td><span class="chip">CATALOGUED</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">LIVE = carrying production data today. CATALOGUED = specified and buildable on contract &mdash; built against the real byte stream, validated against the real center before anything counts.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">Why SIMPL first</div>
+  <h2>The best platform deserves<br>the first integration.</h2>
+  <p class="lead">Seyond ships more LiDAR into ITS than anyone, and SIMPL-Intersection and SIMPL-Highway are deployed or in pipeline across multiple states. Every deployment hits the same wall: the sensor is modern, the center software isn't, and the integration line item stalls the deal. That wall is our entire company &mdash; which is why SIMPL gets the first and deepest translation coverage in the catalog.</p>
+  <div class="how">
+    <div class="hcell"><div class="hn">01</div><div class="ht">Your deal moves faster</div><p>The TMC-integration objection dies at proposal time: the translation is a published line item with live production proof behind it, not a custom project with an integrator to be named later.</p></div>
+    <div class="hcell"><div class="hn">02</div><div class="ht">Self-serve configs</div><p>Sign up, get configs, deploy. Each translation ships as a hardware-locked, signed configuration &mdash; operated and monitored by us as managed infrastructure, not a code drop your team babysits.</p></div>
+    <div class="hcell"><div class="hn">03</div><div class="ht">Every config moves hardware</div><p>The economics point one direction: every translation sold means another Falcon K deployed. We win when your sensors land inside their software and stay there.</p></div>
+    <div class="hcell"><div class="hn">04</div><div class="ht">Certified prime delivery</div><p>Where the contract vehicle wants certification credit &mdash; 8(a), SDVOSB, DBE, HUB &mdash; delivery flows through a certified prime and strengthens the bid.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">First movers</div>
+  <h2>The sensor vendors who get here first win the DOT market.</h2>
+  <p class="lead">Agencies don't replace their center software for a sensor &mdash; the sensor that speaks the center's language wins the procurement. A standing, published, production-proven translation makes SIMPL the path of least resistance on every bid where the TMC is the constraint. The protocol barrier is solved; the only question is whose hardware rides through first.</p>
+  <div class="cta">
+    <a class="btn primary" href="/#contact">Start the conversation</a>
+    <a class="btn" href="/partners.html">Full translator catalog &rarr;</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><div class="fin">
+  <div>TRAFFIC AUTHORITY &middot; ITS PROTOCOL TRANSLATION</div>
+  <div>7 TRANSLATORS BUILT &middot; 2 LIVE &middot; &copy; 2026</div>
+</div></div></footer>
+
+</body>
+</html>
