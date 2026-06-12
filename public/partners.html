@@ -2,169 +2,433 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Channel Partners — Traffic Authority · ITS Protocol Translation</title>
-<meta name="description" content="The translation slice, ready to plug into your ITS bid. Seven translators built; two live in production. Channel partner territories for TCS, AM Signal, and NTCIP-universal integrators — delivered through a certified 8(a) / SDVOSB / DBE / HUB / NCTRCA prime.">
-<meta property="og:title" content="Traffic Authority — Channel Partners">
-<meta property="og:description" content="Seven protocol translators. Two live. Territory-ready for your next ITS bid.">
-<meta property="og:type" content="website">
+<!-- Centripetal Inbound Funnel tracker -->
+<script>
+(function () {
+    var SITE_SLUG = "traffic";
+    var ENDPOINT  = "https://ulzyudbqkmjistymlqwg.supabase.co/rest/v1/rpc/fn_ingest_lead_event";
+    var ANON_KEY  = "sb_publishable_BrUeC0HYQJXMufuFrosudA_q2ni_r_C";
+    function send(t, ex) {
+        var b = Object.assign({
+            p_site_slug: SITE_SLUG, p_event_type: t, p_source: "ga4",
+            p_page_path: location.pathname, p_page_title: document.title,
+            p_visitor_id: localStorage.getItem("cf_vid") || (function(){var v="v_"+Math.random().toString(36).slice(2);localStorage.setItem("cf_vid",v);return v;})()
+        }, ex || {});
+        fetch(ENDPOINT, {method:"POST", headers:{"Content-Type":"application/json","apikey":ANON_KEY}, body:JSON.stringify(b), keepalive:true}).catch(function(){});
+    }
+    send("pageview");
+    var _push = history.pushState;
+    history.pushState = function(){ _push.apply(this, arguments); send("pageview"); };
+    window.addEventListener("popstate", function(){ send("pageview"); });
+    document.addEventListener("submit", function(e){
+        if (e.target && e.target.hasAttribute("data-funnel-form")) {
+            var fd = new FormData(e.target);
+            send("form_fill", {p_source:"form", p_person_email:fd.get("email")||null, p_person_name:fd.get("name")||null, p_company:fd.get("company")||null});
+        }
+    }, true);
+})();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0e0e10">
-<meta name="robots" content="index, follow">
+<title>Sensor Partners — Traffic Authority</title>
+<meta name="description" content="Production protocol translation between modern LiDAR sensors and legacy DOT backends. Seven translators live or production-ready across TxDOT, FDOT, NTTA, CFX, MDX, and NTCIP.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<!-- GA4 -->
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-86S8R140PV"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-86S8R140PV');</script>
-<!-- RB2B -->
-<script>!function(){var reb2b=window.reb2b=window.reb2b||[];if(reb2b.invoked)return;reb2b.invoked=true;reb2b.methods=["identify","collect"];reb2b.factory=function(method){return function(){var args=Array.prototype.slice.call(arguments);args.unshift(method);reb2b.push(args);return reb2b;};};for(var i=0;i<reb2b.methods.length;i++){var key=reb2b.methods[i];reb2b[key]=reb2b.factory(key);}reb2b.load=function(key){var script=document.createElement("script");script.type="text/javascript";script.async=true;script.src="https://b2bjsstore.s3.us-west-2.amazonaws.com/b/"+key+"/"+key+".js.gz";var first=document.getElementsByTagName("script")[0];first.parentNode.insertBefore(script,first);};reb2b.SNIPPET_VERSION="1.0.1";reb2b.load("46DJ4HGGJM61");}();</script>
+<script>!function(){var reb2b=window.reb2b=window.reb2b||[];if(reb2b.invoked)return;reb2b.invoked=true;reb2b.methods=["identify","collect"];reb2b.factory=function(method){return function(){var args=Array.prototype.slice.call(arguments);args.unshift(method);reb2b.push(args);return reb2b}};for(var i=0;i<reb2b.methods.length;i++){var key=reb2b.methods[i];reb2b[key]=reb2b.factory(key)}reb2b.load=function(key){var script=document.createElement("script");script.type="text/javascript";script.async=true;script.src="https://s3-us-west-2.amazonaws.com/b2bjsstore/b/"+key+"/46DJ4HGGJM61.js";var first=document.getElementsByTagName("script")[0];first.parentNode.insertBefore(script,first)};reb2b.load("46DJ4HGGJM61")}();</script>
+<!-- PostHog — audience segmentation: DOT agencies vs sensor/tech companies -->
+<script>
+(function(){
+  var PH_KEY = "POSTHOG_KEY_PLACEHOLDER"; // paste phc_... project key
+  if (!PH_KEY || PH_KEY.indexOf("phc_") !== 0) return; // silent no-op until key set
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload group resetGroups".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init(PH_KEY, {api_host: "https://us.i.posthog.com", capture_pageview: true, autocapture: true, session_recording: {maskAllInputs: false}});
+
+  // Audience segmentation — register once per visitor:
+  // send DOTs links with ?aud=dot, sensor/tech companies with ?aud=lidar
+  var aud = new URLSearchParams(location.search).get("aud");
+  if (aud) posthog.register({audience: aud === "dot" ? "dot_agency" : (aud === "lidar" ? "sensor_vendor" : aud)});
+
+  // Form fills — identify person + classify by email domain
+  document.addEventListener("submit", function(e){
+    if (!(e.target && e.target.hasAttribute("data-funnel-form"))) return;
+    var fd = new FormData(e.target);
+    var email = (fd.get("email")||"").toLowerCase();
+    var domain = email.split("@")[1] || "";
+    var seg = /\.gov$|\.us$|dot\.|txdot|fdot|ntta|cfx|mdx/.test(domain) ? "dot_agency" : "sensor_vendor";
+    if (email) {
+      posthog.identify(email, {name: fd.get("name")||null, company: fd.get("company")||null, territory: fd.get("territory")||null, audience: seg});
+      if (domain) posthog.group("company", domain, {name: fd.get("company")||domain, audience: seg});
+    }
+    posthog.capture("partner_walkthrough_requested", {company: fd.get("company")||null, territory: fd.get("territory")||null, audience: seg});
+  }, true);
+})();
+</script>
 <style>
-:root{--ink:#0e0e10;--paper:#f4f1ea;--yellow:#ffd100;--rule:#d8d3c6;--mut:#6b675d;--green:#1d6b3c}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--paper);color:var(--ink);font-family:'IBM Plex Serif',serif;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
-a{color:var(--ink)}
-header{border-bottom:1px solid var(--ink);background:var(--paper);position:sticky;top:0;z-index:50}
-.hin{max-width:1060px;margin:0 auto;padding:0 24px;height:58px;display:flex;align-items:center;justify-content:space-between}
-.wm{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:17px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none}
-.wm b{background:var(--yellow);padding:1px 6px}
-.hl{font-family:'IBM Plex Mono',monospace;font-size:12px;text-decoration:none;border:1px solid var(--ink);padding:8px 14px}
-.hl:hover{background:var(--ink);color:var(--paper)}
-.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut)}
-h1{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(34px,5.4vw,62px);line-height:1.02;letter-spacing:.01em;margin-top:14px}
-h1 .y{background:var(--yellow);padding:0 8px}
-h2{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(23px,3vw,34px);line-height:1.08;margin-top:12px}
-.lead{font-size:clamp(16px,1.9vw,19px);max-width:64ch;margin-top:18px}
-section{padding:72px 0;border-top:1px solid var(--rule)}
-section.hero{border-top:none;padding:84px 0 64px}
-.statrow{display:flex;flex-wrap:wrap;margin-top:38px;border:1px solid var(--ink)}
-.stat{flex:1;min-width:160px;padding:16px 18px;border-right:1px solid var(--ink)}
-.stat:last-child{border-right:none}
-.stat b{display:block;font-family:'IBM Plex Sans Condensed',sans-serif;font-size:clamp(22px,2.6vw,30px);font-weight:700;line-height:1}
-.stat span{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);display:block;margin-top:6px}
-table.cat{width:100%;border-collapse:collapse;margin-top:30px;font-size:14.5px;min-width:720px}
-.catwrap{overflow-x:auto;margin-top:0}
-table.cat th{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-align:left;padding:12px 14px;border-bottom:1px solid var(--ink);color:var(--mut);font-weight:500}
-table.cat td{padding:14px;border-bottom:1px solid var(--rule);vertical-align:top}
-table.cat td.code{font-family:'IBM Plex Mono',monospace;font-weight:600;white-space:nowrap}
-.chip{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border:1px solid var(--ink);white-space:nowrap}
-.chip.live{background:var(--yellow);border-color:var(--ink);font-weight:600}
-.chip.ready{background:#e4efe2;border-color:var(--green);color:var(--green)}
-.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0;border:1px solid var(--ink);margin-top:34px}
-.tcell{padding:26px;border-right:1px solid var(--ink)}
-.tcell:last-child{border-right:none}
-@media (max-width:920px){.tcell{border-right:none;border-bottom:1px solid var(--ink)}.tcell:last-child{border-bottom:none}}
-.tcell .tn{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:20px}
-.tcell .tt{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;background:var(--yellow);display:inline-block;padding:2px 8px;margin-top:8px}
-.tcell p{font-size:14px;margin-top:12px}
-.tcell ul{list-style:none;margin-top:12px}
-.tcell li{font-family:'IBM Plex Mono',monospace;font-size:12px;padding:5px 0;border-top:1px solid var(--rule)}
-.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:26px;margin-top:34px}
-.hcell .hn{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mut)}
-.hcell .ht{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:18px;margin-top:6px}
-.hcell p{font-size:14px;margin-top:8px}
-.certs{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-.cert{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;border:1px solid var(--ink);padding:5px 11px}
-.cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
-.btn{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:15px;letter-spacing:.04em;text-decoration:none;padding:14px 26px;border:1px solid var(--ink)}
-.btn.primary{background:var(--yellow)}
-.btn:hover{background:var(--ink);color:var(--paper)}
-footer{border-top:1px solid var(--ink);padding:34px 0 46px}
-.fin{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mut)}
-.note{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mut);margin-top:16px}
+:root{
+  --paper:#f4f1ea;--paper-2:#ecebe2;--ink:#0e0e10;--ink-soft:#585858;
+  --rule:#1a1a1c;--rule-soft:#b9b6ac;
+  --yellow:#ffd100;--yellow-deep:#e6bd00;
+  --blue:#1d3557;--blue-soft:#34597d;--green:#1f6f3e;--orange:#c7521b;
+  --cond:'IBM Plex Sans Condensed',sans-serif;--serif:'IBM Plex Serif',Georgia,serif;--mono:'IBM Plex Mono',monospace;
+}
+body{font-family:var(--serif);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;line-height:1.6}
+.w{max-width:980px;margin:0 auto}
+.s{padding:64px 24px}
+.s.dk{background:var(--ink);color:var(--paper)}
+.k{font-family:var(--mono);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1.6px}
+.lb{font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.6px;margin-bottom:16px;color:var(--ink-soft);display:flex;align-items:center;gap:10px}
+.lb::before{content:"";width:22px;height:2px;background:var(--yellow)}
+.dk .lb{color:var(--rule-soft)}
+h1{font-family:var(--cond);font-size:50px;font-weight:700;line-height:1.04;letter-spacing:-0.01em;text-transform:uppercase;max-width:780px}
+h2{font-family:var(--cond);font-size:32px;font-weight:700;line-height:1.12;letter-spacing:0;text-transform:uppercase;margin-bottom:16px}
+.bt{font-size:15.5px;line-height:1.75;color:var(--ink-soft);max-width:700px;margin-bottom:16px}
+.dk .bt{color:var(--rule-soft)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+.cd{padding:24px;background:var(--paper);border:1px solid var(--rule)}
+.g3 .cd{border-right:none}
+.g3 .cd:last-child{border-right:1px solid var(--rule)}
+.g2 .cd:first-child{border-right:none}
+.num{font-family:var(--cond);font-size:34px;font-weight:700;color:var(--ink)}
+.tg{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid rgba(244,241,234,0.25);font-family:var(--mono);font-size:11px;letter-spacing:0.5px;color:var(--paper)}
+.tg .d{width:7px;height:7px;background:var(--yellow);flex-shrink:0}
+.pr{display:flex;align-items:center;gap:16px;padding:14px 18px;border:1px solid rgba(244,241,234,0.18);border-bottom:none}
+.pr:last-of-type{border-bottom:1px solid rgba(244,241,234,0.18)}
+.pr .x{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--yellow);min-width:62px;letter-spacing:0.5px}
+.pr .t{font-family:var(--cond);font-size:15px;font-weight:700;color:var(--paper);min-width:170px;text-transform:uppercase;letter-spacing:0.4px}
+.pr .ds{font-family:var(--serif);font-size:12.5px;color:var(--rule-soft);flex:1;line-height:1.55}
+.st{font-family:var(--mono);font-size:10px;font-weight:600;padding:4px 10px;letter-spacing:1.4px;white-space:nowrap}
+.st.live{background:var(--yellow);color:var(--ink)}
+.st.rdy{border:1px solid var(--yellow);color:var(--yellow)}
+.vi{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
+.vi .ic{font-family:var(--mono);font-size:12px;margin-top:3px;flex-shrink:0;font-weight:600}
+.vi .tx{font-size:13.5px;color:var(--ink-soft);line-height:1.6}
+.gb{margin-top:18px;padding:14px 16px;border:1px solid var(--rule);border-left:4px solid var(--green);font-size:13px;color:var(--ink);line-height:1.65;background:var(--paper-2)}
+.btn{display:inline-block;padding:14px 32px;font-family:var(--cond);font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;cursor:pointer;text-decoration:none}
+.btn.pri{background:var(--yellow);color:var(--ink);border:2px solid var(--yellow)}
+.btn.pri:hover{background:var(--yellow-deep);border-color:var(--yellow-deep)}
+.btn.sec{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.btn.sec:hover{background:var(--ink);color:var(--paper)}
+.terr{border:1px solid rgba(244,241,234,0.2);margin-top:28px}
+.terr-row{display:grid;grid-template-columns:180px 1.35fr 1fr;gap:0;padding:18px 20px;border-bottom:1px solid rgba(244,241,234,0.12);align-items:start}
+.terr-row:last-child{border-bottom:none}
+.terr-row.hd{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--rule-soft);text-transform:uppercase;letter-spacing:1.4px;padding:12px 20px;background:rgba(244,241,234,0.05);align-items:center}
+.terr .pn{font-family:var(--cond);font-size:16px;font-weight:700;color:var(--paper);text-transform:uppercase;line-height:1.2}
+.terr .pt{font-family:var(--mono);font-size:10px;color:var(--rule-soft);margin-top:6px;line-height:1.6;letter-spacing:0.3px}
+.terr .rd{font-family:var(--serif);font-size:13px;color:var(--rule-soft);line-height:1.7;padding-right:18px}
+.terr .rd b{color:var(--yellow);font-family:var(--mono);font-weight:600;font-size:12px}
+.comp-row{display:grid;grid-template-columns:1.4fr 1.1fr 1fr;gap:0;padding:12px 16px;border-bottom:1px solid rgba(244,241,234,0.1);align-items:center;font-size:13px;font-family:var(--serif)}
+.comp-row.hd{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--rule-soft);text-transform:uppercase;letter-spacing:1.4px;border-bottom:1px solid rgba(244,241,234,0.25)}
+.kv{font-family:var(--mono);font-size:10px;letter-spacing:1.4px;color:var(--ink-soft)}
+.kv .k2{color:var(--rule-soft)}
+@media(max-width:768px){h1{font-size:34px}h2{font-size:25px}.g2,.g3{grid-template-columns:1fr}.flow-g{grid-template-columns:1fr!important}.form-g{grid-template-columns:1fr!important}.flow-g>div{border-right:none!important;border-bottom:1px solid var(--rule)}.flow-g>div:last-child{border-bottom:none}.g3 .cd{border-right:1px solid var(--rule);border-bottom:none}.g3 .cd:last-child{border-bottom:1px solid var(--rule)}.g2 .cd:first-child{border-right:1px solid var(--rule);border-bottom:none}.pr{flex-wrap:wrap}.terr-row{grid-template-columns:1fr;gap:10px}.comp-row{grid-template-columns:1fr;gap:4px;padding:14px 16px}}
 </style>
 </head>
 <body>
 
-<header><div class="hin">
-  <a class="wm" href="/">TRAFFIC <b>AUTHORITY</b></a>
-  <a class="hl" href="/#contact">CONTACT &rarr;</a>
-</div></header>
-
-<section class="hero"><div class="wrap">
-  <div class="eyebrow">Channel partners &middot; protocol translation</div>
-  <h1>The translation slice,<br>ready to plug into <span class="y">your bid.</span></h1>
-  <p class="lead">Modern ITS sensors and legacy Traffic Management Centers don't speak the same language. We build and operate the translators between them &mdash; sensor-side protocol in, TMC-standard out, run as managed infrastructure. You keep the customer, the contract, and the prime position. We make your hardware land inside their software.</p>
-  <div class="statrow">
-    <div class="stat"><b>7</b><span>translators built</span></div>
-    <div class="stat"><b>2</b><span>live in production</span></div>
-    <div class="stat"><b>5</b><span>production-ready</span></div>
-    <div class="stat"><b>Nationwide</b><span>via certified prime</span></div>
+<!-- HEADER -->
+<div style="background:var(--ink);border-bottom:3px solid var(--yellow);padding:0 24px">
+<div class="w" style="display:flex;justify-content:space-between;align-items:center;padding:16px 0;gap:16px;flex-wrap:wrap">
+  <div style="display:flex;align-items:center;gap:12px">
+    <div style="width:30px;height:30px;background:var(--yellow);display:flex;align-items:center;justify-content:center;font-family:var(--cond);font-size:17px;font-weight:700;color:var(--ink)">TA</div>
+    <span style="font-family:var(--cond);font-size:15px;font-weight:700;color:var(--paper);letter-spacing:1.2px">TRAFFIC AUTHORITY</span>
   </div>
-</div></section>
+  <div class="kv"><span class="k2">PROGRAM</span> · SENSOR PARTNERS&nbsp;&nbsp;&nbsp;<span class="k2">CLASSIFICATION</span> · PUBLIC</div>
+</div>
+</div>
 
-<section><div class="wrap">
-  <div class="eyebrow">The catalog</div>
-  <h2>Seven translators. Two carrying live traffic.</h2>
-  <p class="lead">Each translator is a hardened, single-purpose protocol bridge &mdash; built against the real byte stream, validated against the real TMC, then operated and monitored as managed infrastructure. LIVE means deployed and carrying production data today. PRODUCTION-READY means built and validated, awaiting a deployment partner.</p>
-  <div class="catwrap"><table class="cat">
-    <thead><tr><th>Code</th><th>Translation</th><th>Where it fits</th><th>Status</th></tr></thead>
-    <tbody>
-      <tr><td class="code">XLT&#8209;001</td><td>Z1 HD binary radar stream &rarr; TMC ingest</td><td>HD sensor deployments on legacy center software</td><td><span class="chip live">LIVE</span></td></tr>
-      <tr><td class="code">XLT&#8209;042</td><td>Wavetronix HD &rarr; TMC ingest</td><td>The most widely deployed HD radar in the country</td><td><span class="chip live">LIVE</span></td></tr>
-      <tr><td class="code">XLT&#8209;002</td><td>Sensor feeds &rarr; FDOT SunGuide</td><td>Every Florida district running SunGuide</td><td><span class="chip ready">PRODUCTION&#8209;READY</span></td></tr>
-      <tr><td class="code">XLT&#8209;015</td><td>Wrong-way driver detection &rarr; NTTA systems</td><td>Tollway WWD programs, Texas pattern</td><td><span class="chip ready">PRODUCTION&#8209;READY</span></td></tr>
-      <tr><td class="code">XLT&#8209;018</td><td>Sensor feeds &rarr; CFX systems</td><td>Central Florida Expressway corridors</td><td><span class="chip ready">PRODUCTION&#8209;READY</span></td></tr>
-      <tr><td class="code">XLT&#8209;019</td><td>Sensor feeds &rarr; MDX systems</td><td>Miami-Dade expressway network</td><td><span class="chip ready">PRODUCTION&#8209;READY</span></td></tr>
-      <tr><td class="code">XLT&#8209;026</td><td>NTCIP 1209 transportation sensor standard</td><td>Universal &mdash; any NTCIP-conformant center, any state</td><td><span class="chip ready">PRODUCTION&#8209;READY</span></td></tr>
-    </tbody>
-  </table></div>
-  <p class="note">A protocol not on this list is a build, not a barrier &mdash; new translators are built against your sensor's real byte stream and validated before anything touches production.</p>
-</div></section>
+<!-- HERO -->
+<div style="background:var(--ink);padding:78px 24px 84px">
+<div class="w">
+  <div class="lb" style="color:var(--rule-soft)">LiDAR &amp; Sensor Channel Partners</div>
+  <h1 style="color:var(--paper);margin-bottom:24px">Your sensors work.<br>DOT backends don't speak their language.<br><span style="color:var(--yellow)">We translate.</span></h1>
+  <p style="font-family:var(--serif);font-size:17px;color:var(--rule-soft);line-height:1.75;max-width:660px">
+    Seven production translators between modern LiDAR data and the legacy ATMS protocols state DOTs actually run — TxDOT Z1 binary, FDOT SunGuide, NTTA wrong-way, CFX, MDX, NTCIP 1209, Wavetronix HD emulation. Deployed at the edge, byte-level verified, ready to plug into your next bid.
+  </p>
+  <div style="display:flex;gap:10px;margin-top:36px;flex-wrap:wrap">
+    <div class="tg"><span class="d"></span>7 PROTOCOLS PRODUCTION-READY</div>
+    <div class="tg"><span class="d"></span>TXDOT TRANSLATOR LIVE IN FIELD</div>
+    <div class="tg"><span class="d"></span>AIR-GAPPED EDGE DEPLOYMENT</div>
+    <div class="tg"><span class="d"></span>2–4 WK NEW-PROTOCOL TURNAROUND</div>
+  </div>
+</div>
+</div>
 
-<section><div class="wrap">
-  <div class="eyebrow">Territory</div>
-  <h2>Where each partner is covered today.</h2>
-  <div class="grid3">
-    <div class="tcell">
-      <div class="tn">TCS</div>
-      <div class="tt">Florida / Tennessee &middot; WWD national</div>
-      <p>Five translators ready in-territory: SunGuide, CFX, and MDX cover the Florida center landscape; the NTTA wrong-way-driver pattern travels nationally; NTCIP covers the rest.</p>
-      <ul><li>XLT&#8209;002 &middot; SunGuide</li><li>XLT&#8209;018 &middot; CFX</li><li>XLT&#8209;019 &middot; MDX</li><li>XLT&#8209;015 &middot; WWD national</li><li>XLT&#8209;026 &middot; NTCIP</li></ul>
+<!-- THE GAP -->
+<div class="s">
+<div class="w">
+  <div class="lb">The Problem Everyone Knows About</div>
+  <h2>Every modern sensor deployment hits the same wall.</h2>
+  <p class="bt">LiDAR produces rich, modern data — JSON, point clouds, real-time telemetry. The DOT infrastructure it deploys into speaks protocols designed decades ago: Z1 binary, SunGuide XML, NTCIP 1209, Wavetronix serial. Without translation, the data never reaches the ATMS. Deployments stall. Hardware sits in boxes. Bids get scored down on integration risk.</p>
+  <p class="bt">This isn't one vendor's problem. It's the industry's problem — and it shows up in every legacy DOT deployment, in every territory.</p>
+  <div class="g3" style="margin-top:32px">
+    <div class="cd">
+      <div class="num">300K+</div>
+      <div style="font-family:var(--cond);font-size:14px;font-weight:600;margin-top:6px;text-transform:uppercase;letter-spacing:0.4px">US signalized intersections</div>
+      <div style="font-size:12.5px;color:var(--ink-soft);margin-top:4px">Majority running legacy detection protocols</div>
     </div>
-    <div class="tcell">
-      <div class="tn">AM Signal</div>
-      <div class="tt">Western US</div>
-      <p>Wavetronix HD live in production today &mdash; the exact sensor line AM Signal distributes &mdash; plus NTCIP 1209 for every conformant center in the territory.</p>
-      <ul><li>XLT&#8209;042 &middot; Wavetronix HD &middot; LIVE</li><li>XLT&#8209;026 &middot; NTCIP</li></ul>
+    <div class="cd">
+      <div class="num">50+</div>
+      <div style="font-family:var(--cond);font-size:14px;font-weight:600;margin-top:6px;text-transform:uppercase;letter-spacing:0.4px">State DOTs with legacy ATMS</div>
+      <div style="font-size:12.5px;color:var(--ink-soft);margin-top:4px">Each with different protocol requirements</div>
     </div>
-    <div class="tcell">
-      <div class="tn">Any Partner</div>
-      <div class="tt">NTCIP universal</div>
-      <p>NTCIP 1209 is the federal transportation-sensor standard. If the center is conformant, the translation slice is ready &mdash; whatever the state, whatever the sensor brand you carry.</p>
-      <ul><li>XLT&#8209;026 &middot; NTCIP 1209</li><li>+ new builds against your line</li></ul>
+    <div class="cd">
+      <div class="num">$14.8M</div>
+      <div style="font-family:var(--cond);font-size:14px;font-weight:600;margin-top:6px;text-transform:uppercase;letter-spacing:0.4px">El Paso LiDAR project alone</div>
+      <div style="font-size:12.5px;color:var(--ink-soft);margin-top:4px">48 intersections — protocol translation required</div>
     </div>
   </div>
-</div></section>
+</div>
+</div>
 
-<section><div class="wrap">
-  <div class="eyebrow">Structure</div>
-  <h2>How the partnership works.</h2>
-  <div class="how">
-    <div class="hcell"><div class="hn">01</div><div class="ht">You keep the customer</div><p>Your relationship, your contract, your prime or distributor position. We never contact your agency, your procurement office, or your end customer. The translation slice rides inside your bid.</p></div>
-    <div class="hcell"><div class="hn">02</div><div class="ht">We carry the translation</div><p>Build, validation, deployment, and ongoing operation of the protocol bridge &mdash; managed infrastructure with monitoring, not a code drop. Your hardware lands in their software and stays landed.</p></div>
-    <div class="hcell"><div class="hn">03</div><div class="ht">Certified prime delivery</div><p>Contract vehicles that need certification credit get it: delivery flows through a certified prime, which strengthens the bid rather than complicating it.</p></div>
-    <div class="hcell"><div class="hn">04</div><div class="ht">Priced per translation</div><p>A defined slice with a defined price &mdash; line-item clean, easy to carry inside a larger bid, no scope ambiguity for your estimators.</p></div>
-  </div>
-  <div class="certs">
-    <span class="cert">8(a)</span><span class="cert">SDVOSB</span><span class="cert">DBE</span><span class="cert">HUB</span><span class="cert">NCTRCA</span>
-  </div>
-</div></section>
+<!-- HOW IT WORKS -->
+<div class="s" style="background:var(--paper-2)">
+<div class="w">
+  <div class="lb">How It Works</div>
+  <h2>The translation path. Four stages, one edge box.</h2>
+  <p class="bt">From sensor output to TMC-native protocol in under 100 milliseconds — entirely at the deployment site. No cloud hop, no middleware on the DOT network, no changes to the backend.</p>
 
-<section><div class="wrap">
-  <div class="eyebrow">Next step</div>
-  <h2>Bring us the bid. We'll bring the slice.</h2>
-  <p class="lead">If there's an opportunity on your desk with a protocol gap in it &mdash; or a sensor line that keeps stalling at the TMC integration line item &mdash; that's the conversation.</p>
-  <div class="cta">
-    <a class="btn primary" href="/#contact">Start the conversation</a>
-    <a class="btn" href="/">Main site &rarr;</a>
+  <div style="margin-top:30px;border:1px solid var(--rule);background:var(--paper)">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr" class="flow-g">
+      <div style="padding:24px 20px;border-right:1px solid var(--rule);position:relative">
+        <div style="font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:1.6px;color:var(--ink-soft)">STAGE 01</div>
+        <div style="font-family:var(--cond);font-size:17px;font-weight:700;text-transform:uppercase;margin-top:8px">Sensor Output</div>
+        <div style="font-size:12.5px;color:var(--ink-soft);margin-top:8px;line-height:1.6">LiDAR emits modern data — JSON events, object lists, real-time telemetry — exactly as the manufacturer designed it. No firmware changes, no custom sensor config.</div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--blue);margin-top:12px;letter-spacing:0.5px">IN · JSON / TCP / UDP STREAM</div>
+      </div>
+      <div style="padding:24px 20px;border-right:1px solid var(--rule)">
+        <div style="font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:1.6px;color:var(--ink-soft)">STAGE 02</div>
+        <div style="font-family:var(--cond);font-size:17px;font-weight:700;text-transform:uppercase;margin-top:8px">Edge Translator</div>
+        <div style="font-size:12.5px;color:var(--ink-soft);margin-top:8px;line-height:1.6">Docker container on the site's edge processor decodes the stream and maps detections to the target protocol's data model. Config cryptographically signed and hardware-locked.</div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--blue);margin-top:12px;letter-spacing:0.5px">XLT MODULE · AIR-GAPPED</div>
+      </div>
+      <div style="padding:24px 20px;border-right:1px solid var(--rule)">
+        <div style="font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:1.6px;color:var(--ink-soft)">STAGE 03</div>
+        <div style="font-family:var(--cond);font-size:17px;font-weight:700;text-transform:uppercase;margin-top:8px">Protocol Stream</div>
+        <div style="font-size:12.5px;color:var(--ink-soft);margin-top:8px;line-height:1.6">Encoder emits a byte-perfect legacy stream — Z1 binary frames, SunGuide XML, NTCIP 1209 objects, or Wavetronix HD serial — verified against protocol spec to the byte.</div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--blue);margin-top:12px;letter-spacing:0.5px">OUT · TARGET PROTOCOL, NATIVE FRAMING</div>
+      </div>
+      <div style="padding:24px 20px;background:var(--ink)">
+        <div style="font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:1.6px;color:var(--yellow)">STAGE 04</div>
+        <div style="font-family:var(--cond);font-size:17px;font-weight:700;text-transform:uppercase;margin-top:8px;color:var(--paper)">TMC Accepts as Native</div>
+        <div style="font-size:12.5px;color:var(--rule-soft);margin-top:8px;line-height:1.6">The ATMS polls and receives exactly what it expects from a legacy device. Zero backend changes, zero DOT-side software, zero network policy exceptions.</div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--yellow);margin-top:12px;letter-spacing:0.5px">TMC-NATIVE · NO BACKEND CHANGES</div>
+      </div>
+    </div>
   </div>
-</div></section>
 
-<footer><div class="wrap"><div class="fin">
-  <div>TRAFFIC AUTHORITY &middot; ITS PROTOCOL TRANSLATION</div>
-  <div>&copy; 2026 &middot; NATIONWIDE VIA CERTIFIED PRIME</div>
-</div></div></footer>
+  <div style="display:flex;gap:0;margin-top:0;border:1px solid var(--rule);border-top:none;background:var(--paper)">
+    <div style="flex:1;padding:12px 20px;font-family:var(--mono);font-size:10px;letter-spacing:1.4px;color:var(--ink-soft)">FIELD STREAM → EDGE → TMC&nbsp;&nbsp;·&nbsp;&nbsp;END-TO-END LATENCY &lt;100MS&nbsp;&nbsp;·&nbsp;&nbsp;SAME PATH, EVERY PROTOCOL — ONLY THE ENCODER MODULE CHANGES</div>
+  </div>
+</div>
+</div>
+
+<!-- PROTOCOL STATUS -->
+<div class="s dk">
+<div class="w">
+  <div class="lb">Translator Library — Current Status</div>
+  <h2 style="color:var(--paper)">Seven translators. Production-ready today.</h2>
+  <p class="bt">Each translator converts modern LiDAR sensor output into a byte-perfect legacy protocol stream the target DOT backend accepts as native. LIVE means deployed and operating in the field. PRODUCTION-READY means complete, verified against protocol spec, and deployable on award.</p>
+
+  <div style="margin-top:28px">
+    <div class="pr"><div class="x">XLT-001</div><div class="t">Z1 HD Binary</div><div class="ds">TxDOT ATMS — freeway + intersection detection, SWRI polling</div><div class="st live">LIVE</div></div>
+    <div class="pr"><div class="x">XLT-042</div><div class="t">Wavetronix HD</div><div class="ds">Sensor emulation — LiDAR presents to existing backends as Wavetronix HD radar. Dominant install base across Western US</div><div class="st live">LIVE</div></div>
+    <div class="pr"><div class="x">XLT-002</div><div class="t">SunGuide XML</div><div class="ds">FDOT statewide ATMS — detection + event data into SunGuide</div><div class="st rdy">PRODUCTION-READY</div></div>
+    <div class="pr"><div class="x">XLT-015</div><div class="t">NTTA Wrong-Way</div><div class="ds">NTTA wrong-way driver backend — pairs with any WWD detection device for full backend integration</div><div class="st rdy">PRODUCTION-READY</div></div>
+    <div class="pr"><div class="x">XLT-018</div><div class="t">CFX</div><div class="ds">Central Florida Expressway Authority backend integration</div><div class="st rdy">PRODUCTION-READY</div></div>
+    <div class="pr"><div class="x">XLT-019</div><div class="t">MDX</div><div class="ds">Greater Miami Expressway Agency backend integration</div><div class="st rdy">PRODUCTION-READY</div></div>
+    <div class="pr"><div class="x">XLT-026</div><div class="t">NTCIP 1209</div><div class="ds">Standard transportation sensor objects — universal across modern ATMS, any territory</div><div class="st rdy">PRODUCTION-READY</div></div>
+  </div>
+
+  <div style="margin-top:20px;padding:14px 16px;border:1px solid rgba(244,241,234,0.18);border-left:4px solid var(--yellow)">
+    <div style="font-family:var(--mono);font-size:10px;color:var(--yellow);font-weight:600;letter-spacing:1.4px">NEED A PROTOCOL NOT LISTED?</div>
+    <div style="font-size:12.5px;color:var(--rule-soft);margin-top:5px;line-height:1.65">50 legacy protocol targets catalogued and prioritized. New output encoder: typically 2–4 weeks. Edge deployment, config signing, and monitoring infrastructure are shared across every translator.</div>
+  </div>
+</div>
+</div>
+
+<!-- CHANNEL PARTNER TERRITORY GRID -->
+<div class="s dk" style="background:#1a1a1c">
+<div class="w">
+  <div class="lb">Channel Partner Territory Coverage</div>
+  <h2 style="color:var(--paper)">What's ready in your territory, right now.</h2>
+  <p class="bt">Translators mapped to the territories where channel partners sell. If you hold a territory, the protocols below are the ones your DOT customers already run — and the ones your bids get scored on.</p>
+
+  <div class="terr">
+    <div class="terr-row hd"><div>Partner Profile</div><div>Ready Translators</div><div>What It Unlocks</div></div>
+    <div class="terr-row">
+      <div><div class="pn">FL / TN +<br>WWD National</div><div class="pt">FLORIDA &amp; TENNESSEE TERRITORY · NATIONAL WRONG-WAY COVERAGE</div></div>
+      <div class="rd"><b>5 READY:</b> SunGuide XML · CFX · MDX · NTTA Wrong-Way · NTCIP 1209</div>
+      <div class="rd">Full Florida backend coverage on day one. Your WWD detection hardware plus our backend translation = complete wrong-way solution in any state.</div>
+    </div>
+    <div class="terr-row">
+      <div><div class="pn">Western US</div><div class="pt">WESTERN STATES TERRITORY</div></div>
+      <div class="rd"><b>2 READY:</b> Wavetronix HD emulation · NTCIP 1209</div>
+      <div class="rd">Wavetronix HD is the dominant legacy install base in the West — LiDAR that presents as Wavetronix drops into existing backends with zero DOT-side changes.</div>
+    </div>
+    <div class="terr-row">
+      <div><div class="pn">Any Partner</div><div class="pt">ANY TERRITORY · ANY MODERN ATMS</div></div>
+      <div class="rd"><b>UNIVERSAL:</b> NTCIP 1209</div>
+      <div class="rd">The standards-based path. Anywhere a modern ATMS accepts NTCIP sensor objects, LiDAR data flows in without custom work.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- COMPETITIVE MOAT -->
+<div class="s dk">
+<div class="w">
+  <div class="lb">Market Position</div>
+  <h2 style="color:var(--paper)">The sensor platforms that get here first win the DOT market.</h2>
+  <p class="bt">Every LiDAR, radar, and video analytics company eventually needs protocol translation for DOT deployments. The question is which platforms and which channel partners get it first. The head start compounds — more deployments means more protocol coverage, more edge cases solved, more DOT acceptance data behind your next bid.</p>
+
+  <div style="margin-top:28px;border:1px solid rgba(244,241,234,0.2)">
+    <div class="comp-row hd"><div>Approach</div><div>Protocol Translation</div><div>Bid Impact</div></div>
+    <div class="comp-row"><div style="color:var(--yellow);font-family:var(--cond);font-weight:700;text-transform:uppercase;font-size:14px">Partner with Traffic Authority</div><div style="color:var(--paper);font-weight:500">7 production translators</div><div style="color:var(--paper)">Integration risk pre-answered</div></div>
+    <div class="comp-row"><div style="color:var(--rule-soft)">In-house per deployment</div><div style="color:var(--rule-soft)">Ad-hoc, per project</div><div style="color:var(--rule-soft)">Months of NRE per protocol, per bid</div></div>
+    <div class="comp-row"><div style="color:var(--rule-soft)">Wait for DOT modernization</div><div style="color:var(--rule-soft)">None</div><div style="color:var(--rule-soft)">Deals lost to legacy-compatible bids</div></div>
+  </div>
+
+  <div style="margin-top:22px;padding:14px 18px;border:1px solid rgba(244,241,234,0.18);border-left:4px solid var(--yellow)">
+    <div style="font-family:var(--cond);font-size:15px;color:var(--paper);font-weight:700;text-transform:uppercase;letter-spacing:0.3px">The only production translator library covering TxDOT, FDOT, NTTA, CFX, MDX, NTCIP, and Wavetronix emulation in one platform.</div>
+    <div style="font-size:12.5px;color:var(--rule-soft);margin-top:5px">Everyone else is solving this ad-hoc, per deployment, at their own expense — or losing the deal.</div>
+  </div>
+</div>
+</div>
+
+<!-- DEPLOYMENT MODEL -->
+<div class="s">
+<div class="w">
+  <div class="lb">Deployment Model</div>
+  <h2>At the edge. Air-gapped. Verified to the byte.</h2>
+  <p class="bt">The translation engine runs in Docker on the edge processor at the deployment site. No cloud dependency, no internet requirement — DOT network policies stay intact. Configs are cryptographically signed and hardware-locked per site.</p>
+  <div class="g3" style="margin-top:28px">
+    <div class="cd" style="text-align:center;padding:28px 20px">
+      <div class="num">&lt;100MS</div>
+      <div style="font-family:var(--cond);font-size:13px;font-weight:600;margin-top:8px;text-transform:uppercase">Translation latency</div>
+      <div style="font-size:12px;color:var(--ink-soft);margin-top:4px">Real-time at the edge</div>
+    </div>
+    <div class="cd" style="text-align:center;padding:28px 20px">
+      <div class="num">100%</div>
+      <div style="font-family:var(--cond);font-size:13px;font-weight:600;margin-top:8px;text-transform:uppercase">Protocol accuracy</div>
+      <div style="font-size:12px;color:var(--ink-soft);margin-top:4px">Byte-level verified output</div>
+    </div>
+    <div class="cd" style="text-align:center;padding:28px 20px">
+      <div class="num">0</div>
+      <div style="font-family:var(--cond);font-size:13px;font-weight:600;margin-top:8px;text-transform:uppercase">Internet required</div>
+      <div style="font-size:12px;color:var(--ink-soft);margin-top:4px">Fully air-gapped operation</div>
+    </div>
+  </div>
+  <div class="g3" style="border-top:none">
+    <div class="cd" style="text-align:center;padding:28px 20px;border-top:none">
+      <div class="num">99.5%</div>
+      <div style="font-family:var(--cond);font-size:13px;font-weight:600;margin-top:8px;text-transform:uppercase">Uptime tested</div>
+      <div style="font-size:12px;color:var(--ink-soft);margin-top:4px">7-day unattended bench test</div>
+    </div>
+    <div class="cd" style="text-align:center;padding:28px 20px;border-top:none">
+      <div class="num">HW</div>
+      <div style="font-family:var(--cond);font-size:13px;font-weight:600;margin-top:8px;text-transform:uppercase">Config locked</div>
+      <div style="font-size:12px;color:var(--ink-soft);margin-top:4px">Cryptographically signed per site</div>
+    </div>
+    <div class="cd" style="text-align:center;padding:28px 20px;border-top:none">
+      <div class="num">2–4 WK</div>
+      <div style="font-family:var(--cond);font-size:13px;font-weight:600;margin-top:8px;text-transform:uppercase">New protocol</div>
+      <div style="font-size:12px;color:var(--ink-soft);margin-top:4px">One encoder module, shared platform</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PARTNERSHIP -->
+<div class="s" style="background:var(--paper-2)">
+<div class="w">
+  <div class="lb">Partnership</div>
+  <h2>Every translator deployed means more sensors sold in your territory.</h2>
+  <p class="bt">We don't sell sensors and we don't bid against you. We make your hardware land in legacy backends — so your bids carry less integration risk and your deployments don't stall after award.</p>
+  <div class="g2" style="margin-top:28px">
+    <div class="cd" style="padding:28px">
+      <div style="font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:1.6px;margin-bottom:16px;text-transform:uppercase">Value to You</div>
+      <div class="vi"><span class="ic" style="color:var(--green)">+</span><span class="tx">Removes the #1 deployment barrier in legacy DOT environments</span></div>
+      <div class="vi"><span class="ic" style="color:var(--green)">+</span><span class="tx">Territory-matched translators ready before your next bid cycle</span></div>
+      <div class="vi"><span class="ic" style="color:var(--green)">+</span><span class="tx">Your sales team can say "backend integration is handled"</span></div>
+      <div class="vi"><span class="ic" style="color:var(--green)">+</span><span class="tx">Every translated deployment = more sensor units moved</span></div>
+      <div class="vi"><span class="ic" style="color:var(--green)">+</span><span class="tx">Hardware stays yours — we are software and integration only</span></div>
+      <div class="vi"><span class="ic" style="color:var(--green)">+</span><span class="tx">No cost to evaluate, no engineering resources required from you</span></div>
+    </div>
+    <div class="cd" style="padding:28px">
+      <div style="font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:1.6px;margin-bottom:16px;text-transform:uppercase">What We're Asking</div>
+      <div class="vi"><span class="ic" style="color:var(--orange)">→</span><span class="tx">A 15-minute technical walkthrough of the translator library</span></div>
+      <div class="vi"><span class="ic" style="color:var(--orange)">→</span><span class="tx">Referral when your deployments hit the protocol barrier</span></div>
+      <div class="vi"><span class="ic" style="color:var(--orange)">→</span><span class="tx">Inclusion in bids where backend integration is scored</span></div>
+      <div class="vi"><span class="ic" style="color:var(--orange)">→</span><span class="tx">Protocol documentation access for new translator development</span></div>
+      <div class="gb">No funding requested. No revenue share required to start. No engineering lift on your side. You sell hardware; we make it land in the backend your customer already runs.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- LEAD CAPTURE -->
+<div class="s dk">
+<div class="w">
+  <div class="lb">Start the Conversation</div>
+  <h2 style="color:var(--paper)">Tell us your territory. We'll show you what's ready.</h2>
+  <p class="bt">Name, company, and what you're deploying into — we'll come back with the territory-matched translator list and a 15-minute walkthrough slot.</p>
+
+  <form data-funnel-form id="partner-form" style="margin-top:28px;border:1px solid rgba(244,241,234,0.2);padding:28px;max-width:640px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px" class="form-g">
+      <div>
+        <label class="k" style="color:var(--rule-soft);display:block;margin-bottom:6px" for="pf-name">Name</label>
+        <input id="pf-name" name="name" type="text" required style="width:100%;padding:12px 14px;background:transparent;border:1px solid rgba(244,241,234,0.3);color:var(--paper);font-family:var(--serif);font-size:14px">
+      </div>
+      <div>
+        <label class="k" style="color:var(--rule-soft);display:block;margin-bottom:6px" for="pf-email">Work Email</label>
+        <input id="pf-email" name="email" type="email" required style="width:100%;padding:12px 14px;background:transparent;border:1px solid rgba(244,241,234,0.3);color:var(--paper);font-family:var(--serif);font-size:14px">
+      </div>
+      <div>
+        <label class="k" style="color:var(--rule-soft);display:block;margin-bottom:6px" for="pf-company">Company</label>
+        <input id="pf-company" name="company" type="text" required style="width:100%;padding:12px 14px;background:transparent;border:1px solid rgba(244,241,234,0.3);color:var(--paper);font-family:var(--serif);font-size:14px">
+      </div>
+      <div>
+        <label class="k" style="color:var(--rule-soft);display:block;margin-bottom:6px" for="pf-territory">Territory / Protocol of Interest</label>
+        <input id="pf-territory" name="territory" type="text" placeholder="e.g. Florida — SunGuide" style="width:100%;padding:12px 14px;background:transparent;border:1px solid rgba(244,241,234,0.3);color:var(--paper);font-family:var(--serif);font-size:14px">
+      </div>
+    </div>
+    <button type="submit" class="btn pri" style="margin-top:20px;border:none">Request Walkthrough</button>
+    <div id="pf-done" style="display:none;margin-top:20px;padding:14px 16px;border:1px solid var(--yellow);font-family:var(--mono);font-size:11px;letter-spacing:1.4px;color:var(--yellow)">RECEIVED — WE'LL BE IN TOUCH WITHIN ONE BUSINESS DAY.</div>
+  </form>
+  <script>
+  document.getElementById("partner-form").addEventListener("submit", function(e){
+      e.preventDefault();
+      this.querySelectorAll("input,button").forEach(function(el){ el.disabled = true; });
+      document.getElementById("pf-done").style.display = "block";
+      if (window.gtag) gtag("event", "generate_lead", {form: "partner-walkthrough"});
+  });
+  </script>
+</div>
+</div>
+
+<!-- CTA -->
+<div class="s">
+<div class="w" style="text-align:center">
+  <h2>The protocol barrier is solved.<br>Let's put it behind your next bid.</h2>
+  <p class="bt" style="margin:0 auto 32px;text-align:center">15-minute demo — watch live LiDAR data translate to a legacy DOT protocol stream in real time.</p>
+  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+    <a class="btn pri" href="mailto:engineering@traffic-authority.com?subject=Sensor%20Partner%20Program%20%E2%80%94%20Demo%20Request">Schedule a Demo</a>
+    <a class="btn sec" href="mailto:engineering@traffic-authority.com?subject=Sensor%20Partner%20Program%20%E2%80%94%20Translator%20Library%20Question">Ask About a Protocol</a>
+  </div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<div style="padding:20px 24px;background:var(--ink);border-top:3px solid var(--yellow)">
+<div class="w" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px">
+  <div class="kv" style="color:var(--rule-soft)"><span class="k2">TRAFFIC AUTHORITY</span> · traffic-authority.com</div>
+  <div class="kv" style="color:var(--rule-soft)"><span class="k2">PROGRAM</span> · SENSOR PARTNERS · <a href="/" style="color:var(--rule-soft)">MAIN SITE</a></div>
+</div>
+</div>
 
 </body>
 </html>
