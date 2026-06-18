@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Traffic Authority — Platform &amp; Translator Catalog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--ink-80:#444;--ink-60:#666;--ink-40:#999;--ink-20:#ccc;--ink-10:#e5e5e5;--ink-05:#f2f2f0;--paper:#FAF6F0;--white:#fff;--yellow:#F2C94C;--yellow-dim:#F2C94C18;--green:#059669;--green-dim:#05966912;--green-light:#d1fae5;--blue:#2563eb;--blue-dim:#2563eb10;--blue-light:#dbeafe;--coral:#d85a30;--coral-light:#fed7aa;--purple:#7c3aed;--purple-light:#ede9fe;--sans:'IBM Plex Sans',-apple-system,sans-serif;--mono:'IBM Plex Mono','Menlo',monospace}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{font-size:16px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.6}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+nav{padding:14px 0;border-bottom:1px solid var(--ink-10);position:sticky;top:0;background:var(--paper);z-index:100}
+nav .n-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+nav .n-brand{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--ink);text-decoration:none;letter-spacing:.04em}
+nav .n-links{display:flex;gap:4px;flex-wrap:wrap}
+nav .n-links a{font-size:13px;font-weight:500;color:var(--ink-60);text-decoration:none;padding:6px 12px;border-radius:5px;transition:all .1s}
+nav .n-links a:hover{color:var(--ink);background:var(--ink-05)}
+nav .n-links a.active{color:var(--ink);background:var(--yellow-dim)}
+section{padding:56px 0}
+section+section{border-top:1px solid var(--ink-10)}
+.sh-ey{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:var(--ink-40);margin-bottom:8px}
+.btn{display:inline-block;font-family:var(--sans);font-size:14px;font-weight:600;padding:12px 28px;border-radius:6px;text-decoration:none;transition:all .15s}
+.btn-primary{background:var(--ink);color:var(--paper)}.btn-primary:hover{background:#333}
+
+/* Hero */
+.hero{padding:56px 0 48px;border-bottom:3px solid var(--ink)}
+.hero h1{font-size:clamp(24px,4vw,34px);font-weight:600;line-height:1.2;margin-bottom:14px}
+.hero h1 em{font-style:normal;color:var(--green)}
+.hero-sub{font-size:16px;color:var(--ink-60);max-width:680px;line-height:1.7}
+
+/* Stats */
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0}
+.stat{flex:1;min-width:130px;padding:18px 14px;background:var(--white);border:1px solid var(--ink-10);border-radius:8px}
+.stat .s-val{font-size:24px;font-weight:700;margin-bottom:2px}
+.stat .s-label{font-size:11px;color:var(--ink-40);font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em}
+
+/* Translator cards */
+.tx-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:24px 0}
+.tx-card{background:var(--white);border:1px solid var(--ink-10);border-radius:8px;padding:20px 18px;border-left:3px solid var(--ink-10)}
+.tx-card.live{border-left-color:var(--green)}
+.tx-card.ready{border-left-color:var(--blue)}
+.tx-card .tc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.tx-card .tc-code{font-family:var(--mono);font-size:11px;color:var(--ink-40)}
+.tx-card .tc-status{font-family:var(--mono);font-size:10px;font-weight:600;padding:2px 8px;border-radius:3px}
+.tx-card .tc-status.s-complete{background:var(--green-light);color:var(--green)}
+.tx-card .tc-status.s-ready{background:var(--blue-light);color:var(--blue)}
+.tx-card h3{font-size:15px;font-weight:600;margin-bottom:6px}
+.tx-card .tc-meta{font-size:12px;color:var(--ink-40);line-height:1.5}
+.tx-card .tc-desc{font-size:13px;color:var(--ink-60);margin-top:8px;line-height:1.5}
+
+/* Coverage map */
+.cov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin:24px 0}
+.cov-tag{padding:10px;text-align:center;border-radius:6px;border:1px solid var(--ink-10);background:var(--white)}
+.cov-tag .ct-state{font-weight:600;font-size:14px;margin-bottom:2px}
+.cov-tag .ct-status{font-size:10px;font-family:var(--mono)}
+.cov-tag.live{background:var(--green-light);border-color:var(--green)}
+.cov-tag.live .ct-status{color:var(--green)}
+.cov-tag.cataloged .ct-status{color:var(--ink-40)}
+
+/* Full catalog table */
+.cat-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:13px}
+.cat-table th{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-40);text-align:left;padding:8px 10px;border-bottom:2px solid var(--ink);position:sticky;top:48px;background:var(--paper)}
+.cat-table td{padding:8px 10px;border-bottom:1px solid var(--ink-10);vertical-align:top}
+.cat-table tr:hover{background:var(--yellow-dim)}
+.cat-table .tier-row td{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-40);background:var(--ink-05);padding:6px 10px;font-weight:500}
+.cat-table .st-pill{font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:3px;font-weight:500}
+.cat-table .st-complete{background:var(--green-light);color:var(--green)}
+.cat-table .st-ready{background:var(--blue-light);color:var(--blue)}
+.cat-table .st-ns{color:var(--ink-40)}
+
+/* Competitive */
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+.comp-card{padding:24px 20px;border-radius:10px;background:var(--white);border:1px solid var(--ink-10)}
+.comp-card h3{font-size:16px;font-weight:600;margin-bottom:8px}
+.comp-card p{font-size:14px;color:var(--ink-60);line-height:1.6}
+.comp-card.us{border-left:3px solid var(--green)}
+.comp-card.them{border-left:3px solid var(--ink-20)}
+
+/* Territory */
+.terr-table{width:100%;border-collapse:collapse;margin:24px 0}
+.terr-table th{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-40);text-align:left;padding:10px 12px;border-bottom:2px solid var(--ink)}
+.terr-table td{font-size:13px;padding:12px;border-bottom:1px solid var(--ink-10)}
+.terr-table tr:hover{background:var(--yellow-dim)}
+.t-ready{font-family:var(--mono);font-size:12px;color:var(--green);font-weight:500}
+
+footer{border-top:1px solid var(--ink-10);padding:28px 0;font-size:12px;color:var(--ink-40)}
+@media(max-width:640px){.stats{flex-direction:column}.comp-grid{grid-template-columns:1fr}.cat-table{font-size:12px}.cat-table th,.cat-table td{padding:6px}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap"><div class="n-inner">
+  <a href="index.html" class="n-brand">Traffic Authority</a>
+  <div class="n-links">
+    <a href="index.html">Home</a>
+    <a href="platform.html" class="active">Platform</a>
+    <a href="pricing.html">Pricing</a>
+  </div>
+</div></div></nav>
+
+<div class="wrap">
+
+<div class="hero">
+  <div class="sh-ey">Platform</div>
+  <h1>The translation engine behind <em>every deployment</em></h1>
+  <p class="hero-sub">50 protocols cataloged. 7 production-ready. The hardest formats in the US — TxDOT's proprietary Z1 HD binary, FDOT SunGuide XML, NTCIP field standards — are decoded and shipping. New protocols take days, not months.</p>
+</div>
+
+<!-- STATS -->
+<section>
+  <div class="stats">
+    <div class="stat" style="border-top:3px solid var(--green)"><div class="s-val" style="color:var(--green)">7</div><div class="s-label">Production-ready</div></div>
+    <div class="stat" style="border-top:3px solid var(--yellow)"><div class="s-val">50</div><div class="s-label">Total cataloged</div></div>
+    <div class="stat" style="border-top:3px solid var(--blue)"><div class="s-val">16</div><div class="s-label">State DOT formats</div></div>
+    <div class="stat" style="border-top:3px solid var(--ink)"><div class="s-val">0</div><div class="s-label">Code shared</div></div>
+  </div>
+</section>
+
+<!-- PRODUCTION READY -->
+<section>
+  <div class="sh-ey">Ready to deploy</div>
+  <h2 style="font-size:clamp(20px,3vw,26px);font-weight:600;margin-bottom:6px">Seven translators ship today</h2>
+  <p style="font-size:15px;color:var(--ink-60);max-width:640px;margin-bottom:4px">On a signed deal with tokens purchased, these activate same-day. No build time. No custom engineering.</p>
+
+  <div class="tx-grid">
+    <div class="tx-card live">
+      <div class="tc-head"><span class="tc-code">XLT-001</span><span class="tc-status s-complete">COMPLETE</span></div>
+      <h3>TxDOT TransVISION — Z1 HD</h3>
+      <div class="tc-meta">Texas · Proprietary binary · High complexity</div>
+      <div class="tc-desc">The hardest protocol in the US. Proprietary binary field-level format used by TxDOT's Lonestar/TransVISION ATMS. Fully reverse-engineered and production-complete.</div>
+    </div>
+    <div class="tx-card live">
+      <div class="tc-head"><span class="tc-code">XLT-042</span><span class="tc-status s-complete">COMPLETE</span></div>
+      <h3>Wavetronix SmartSensor HD</h3>
+      <div class="tc-meta">Multi-state · Click protocol · Low complexity</div>
+      <div class="tc-desc">Wavetronix Click protocol for SmartSensor HD radar. Universal — works with any deployment using Wavetronix hardware regardless of state.</div>
+    </div>
+    <div class="tx-card ready">
+      <div class="tc-head"><span class="tc-code">XLT-002</span><span class="tc-status s-ready">READY</span></div>
+      <h3>FDOT SunGuide — XML/NTCIP</h3>
+      <div class="tc-meta">Florida · NTCIP C2C + proprietary extensions · Low complexity</div>
+      <div class="tc-desc">FDOT's statewide ATMS. XML/NTCIP with DATEX-ASN and SunGuide-specific extensions. Foundation for all Florida toll authorities.</div>
+    </div>
+    <div class="tx-card ready">
+      <div class="tc-head"><span class="tc-code">XLT-018</span><span class="tc-status s-ready">READY</span></div>
+      <h3>CFX — Central Florida Expressway</h3>
+      <div class="tc-meta">Florida · SunGuide NTCIP · Low complexity</div>
+      <div class="tc-desc">Inherits from FDOT SunGuide. Central Florida Expressway Authority operations.</div>
+    </div>
+    <div class="tx-card ready">
+      <div class="tc-head"><span class="tc-code">XLT-019</span><span class="tc-status s-ready">READY</span></div>
+      <h3>MDX — Miami-Dade Expressway</h3>
+      <div class="tc-meta">Florida · SunGuide NTCIP · Low complexity</div>
+      <div class="tc-desc">Inherits from FDOT SunGuide. Miami-Dade Expressway Authority operations.</div>
+    </div>
+    <div class="tx-card ready">
+      <div class="tc-head"><span class="tc-code">XLT-015</span><span class="tc-status s-ready">READY</span></div>
+      <h3>NTTA Operations — WWD + Camera</h3>
+      <div class="tc-meta">Texas · NTCIP + custom WWD alert routing · Low complexity</div>
+      <div class="tc-desc">North Texas Tollway Authority wrong-way driver detection and camera integration. Mixed vendor stack with TransSuite elements.</div>
+    </div>
+    <div class="tx-card ready">
+      <div class="tc-head"><span class="tc-code">XLT-026</span><span class="tc-status s-ready">READY</span></div>
+      <h3>NTCIP 1209 Generic — Universal Field Protocol</h3>
+      <div class="tc-meta">Multi-state · NTCIP field-level standard · Low complexity</div>
+      <div class="tc-desc">Universal field protocol standard. Works with any ATMS that accepts NTCIP 1209. The baseline translator for new state deployments.</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATE COVERAGE -->
+<section>
+  <div class="sh-ey">State coverage</div>
+  <h2 style="font-size:clamp(20px,3vw,26px);font-weight:600;margin-bottom:6px">Where we operate today — and where we're ready to build</h2>
+
+  <div class="cov-grid">
+    <div class="cov-tag live"><div class="ct-state">TX</div><div class="ct-status">2 LIVE</div></div>
+    <div class="cov-tag live"><div class="ct-state">FL</div><div class="ct-status">3 READY</div></div>
+    <div class="cov-tag live"><div class="ct-state">NTCIP</div><div class="ct-status">UNIVERSAL</div></div>
+    <div class="cov-tag cataloged"><div class="ct-state">GA</div><div class="ct-status">cataloged</div></div>
+    <div class="cov-tag cataloged"><div class="ct-state">TN</div><div class="ct-status">cataloged</div></div>
+    <div class="cov-tag cataloged"><div class="ct-state">CA</div><div class="ct-status">cataloged</div></div>
+    <div class="cov-tag cataloged"><div class="ct-state">VA</div><div class="ct-status">cataloged</div></div>
+    <div class="cov-tag cataloged"><div class="ct-state">NY</div><div class="ct-status">cataloged</div></div>
+    <div class="cov-tag cataloged"><div class="ct-state">PA</div><div class="ct-status">cataloged</div></div>
+    <div class="cov-tag cataloged"><div class="ct-state">MD</div><div class="ct-status">cataloged</div></div>
+    <div class="cov-tag cataloged"><div class="ct-state">NJ</div><div class="ct-status">cataloged</div></div>
+    <div class="cov-tag cataloged"><div class="ct-state">NC</div><div class="ct-status">cataloged</div></div>
+    <div class="cov-tag cataloged"><div class="ct-state">CO</div><div class="ct-status">cataloged</div></div>
+    <div class="cov-tag cataloged"><div class="ct-state">OR</div><div class="ct-status">cataloged</div></div>
+    <div class="cov-tag cataloged"><div class="ct-state">OH</div><div class="ct-status">cataloged</div></div>
+    <div class="cov-tag cataloged"><div class="ct-state">WA</div><div class="ct-status">cataloged</div></div>
+    <div class="cov-tag cataloged"><div class="ct-state">AZ</div><div class="ct-status">cataloged</div></div>
+    <div class="cov-tag cataloged"><div class="ct-state">NV</div><div class="ct-status">cataloged</div></div>
+    <div class="cov-tag cataloged"><div class="ct-state">UT</div><div class="ct-status">cataloged</div></div>
+    <div class="cov-tag cataloged"><div class="ct-state">MO</div><div class="ct-status">cataloged</div></div>
+  </div>
+  <p style="font-size:13px;color:var(--ink-40);font-style:italic">Cataloged = protocol format documented, build scope estimated. Activation on signed deal with tokens purchased.</p>
+</section>
+
+<!-- FULL CATALOG -->
+<section>
+  <div class="sh-ey">Full translator catalog</div>
+  <h2 style="font-size:clamp(20px,3vw,26px);font-weight:600;margin-bottom:6px">50 targets across five capability tiers</h2>
+  <p style="font-size:15px;color:var(--ink-60);margin-bottom:4px;max-width:640px">Every protocol we've cataloged, the platform it connects to, and how long it takes to build. Builds happen on signed deals only.</p>
+
+  <table class="cat-table">
+    <thead><tr><th>Code</th><th>Target</th><th>Region</th><th>Status</th><th>Build</th></tr></thead>
+    <tbody>
+      <tr class="tier-row"><td colspan="5">Tier 1 — State DOT &amp; Toll Authority Platforms</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-001</td><td><strong>TxDOT TransVISION Z1 HD</strong></td><td>TX</td><td><span class="st-pill st-complete">complete</span></td><td>—</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-002</td><td><strong>FDOT SunGuide XML/NTCIP</strong></td><td>FL</td><td><span class="st-pill st-ready">ready</span></td><td>4 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-015</td><td><strong>NTTA Operations WWD + Camera</strong></td><td>TX</td><td><span class="st-pill st-ready">ready</span></td><td>4 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-018</td><td><strong>CFX (Central FL Expressway)</strong></td><td>FL</td><td><span class="st-pill st-ready">ready</span></td><td>—</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-019</td><td><strong>MDX (Miami-Dade Expressway)</strong></td><td>FL</td><td><span class="st-pill st-ready">ready</span></td><td>—</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-003</td><td>GDOT MaxView — NTCIP</td><td>GA</td><td><span class="st-ns">—</span></td><td>10 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-004</td><td>TDOT SmartWay — NTCIP</td><td>TN</td><td><span class="st-ns">—</span></td><td>8 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-005</td><td>CalTrans PeMS</td><td>CA</td><td><span class="st-ns">—</span></td><td>10 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-006</td><td>CalTrans IRIS</td><td>CA</td><td><span class="st-ns">—</span></td><td>4 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-007</td><td>ADOT ALERT</td><td>AZ</td><td><span class="st-ns">—</span></td><td>7 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-008</td><td>NDOT FAST</td><td>NV</td><td><span class="st-ns">—</span></td><td>7 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-009</td><td>UDOT Commuterlink</td><td>UT</td><td><span class="st-ns">—</span></td><td>7 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-010</td><td>WSDOT Traffic Management</td><td>WA</td><td><span class="st-ns">—</span></td><td>7 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-011</td><td>ODOT TripCheck</td><td>OR</td><td><span class="st-ns">—</span></td><td>7 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-012</td><td>CDOT COTrip</td><td>CO</td><td><span class="st-ns">—</span></td><td>7 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-013</td><td>NCDOT STIC / NC TIMS</td><td>NC</td><td><span class="st-ns">—</span></td><td>7 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-014</td><td>NJDOT / NJ Turnpike</td><td>NJ</td><td><span class="st-ns">—</span></td><td>8 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-016</td><td>HCTRA (Harris County)</td><td>TX</td><td><span class="st-ns">—</span></td><td>4 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-017</td><td>CTRMA (Central TX)</td><td>TX</td><td><span class="st-ns">—</span></td><td>4 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-020</td><td>NYCDOT / NYSDOT TransSuite</td><td>NY</td><td><span class="st-ns">—</span></td><td>12 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-021</td><td>PennDOT RCRS / PA Turnpike</td><td>PA</td><td><span class="st-ns">—</span></td><td>8 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-022</td><td>MDOT CHART</td><td>MD</td><td><span class="st-ns">—</span></td><td>7 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-023</td><td>VDOT Smart Traffic</td><td>VA</td><td><span class="st-ns">—</span></td><td>7 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-024</td><td>MoDOT Gateway Guide</td><td>MO</td><td><span class="st-ns">—</span></td><td>5 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-025</td><td>Ohio OHGO</td><td>OH</td><td><span class="st-ns">—</span></td><td>7 hrs</td></tr>
+
+      <tr class="tier-row"><td colspan="5">Tier 2 — Standards &amp; Field Devices</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-026</td><td><strong>NTCIP 1209 Generic</strong></td><td>multi</td><td><span class="st-pill st-ready">ready</span></td><td>—</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-027</td><td>TMDD C2C Generic</td><td>multi</td><td><span class="st-ns">—</span></td><td>5 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-028</td><td>NTCIP 1202 — Signal Controllers</td><td>multi</td><td><span class="st-ns">—</span></td><td>3 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-029</td><td>NTCIP 1203 — DMS</td><td>multi</td><td><span class="st-ns">—</span></td><td>3 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-030</td><td>NTCIP 1204 — ESS/RWIS</td><td>multi</td><td><span class="st-ns">—</span></td><td>3 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-031</td><td>NTCIP 1205 — CCTV Control</td><td>multi</td><td><span class="st-ns">—</span></td><td>3 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-032</td><td>NTCIP 1207 — Ramp Meters</td><td>multi</td><td><span class="st-ns">—</span></td><td>3 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-033</td><td>NTCIP 1211 — Transit Signal Priority</td><td>multi</td><td><span class="st-ns">—</span></td><td>8 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-034</td><td>SAE J2735 — V2X BSM</td><td>multi</td><td><span class="st-ns">—</span></td><td>14 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-035</td><td>C-V2X Uu + PC5</td><td>multi</td><td><span class="st-ns">—</span></td><td>60 hrs</td></tr>
+
+      <tr class="tier-row"><td colspan="5">Tier 3 — Video, Transit &amp; Tolling</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-042</td><td><strong>Wavetronix SmartSensor HD</strong></td><td>multi</td><td><span class="st-pill st-complete">complete</span></td><td>—</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-036</td><td>GTFS + GTFS-Realtime</td><td>multi</td><td><span class="st-ns">—</span></td><td>5 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-037</td><td>SIRI — Real-time Transit</td><td>multi</td><td><span class="st-ns">—</span></td><td>8 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-038</td><td>Rail Grade Crossing (PTC + NG911)</td><td>multi</td><td><span class="st-ns">—</span></td><td>50 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-039</td><td>ONVIF — Camera Interop</td><td>multi</td><td><span class="st-ns">—</span></td><td>5 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-040</td><td>Rekor AI Perception API</td><td>multi</td><td><span class="st-ns">—</span></td><td>7 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-041</td><td>Miovision Core</td><td>multi</td><td><span class="st-ns">—</span></td><td>7 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-043</td><td>ISO 18000-6C — Tolling RFID</td><td>multi</td><td><span class="st-ns">—</span></td><td>10 hrs</td></tr>
+
+      <tr class="tier-row"><td colspan="5">Tier 4 — Alerting, Smart City &amp; Adjacent</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-044</td><td>CAP — Emergency Alerts</td><td>multi</td><td><span class="st-ns">—</span></td><td>4 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-045</td><td>NG911 Dispatch</td><td>multi</td><td><span class="st-ns">—</span></td><td>40 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-046</td><td>FirstNet Public Safety</td><td>multi</td><td><span class="st-ns">—</span></td><td>40 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-047</td><td>ASTERIX — Air Traffic</td><td>multi</td><td><span class="st-ns">—</span></td><td>50 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-048</td><td>AIS — Maritime Vessel Tracking</td><td>coastal</td><td><span class="st-ns">—</span></td><td>8 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-049</td><td>OGC SensorML — Smart City IoT</td><td>multi</td><td><span class="st-ns">—</span></td><td>8 hrs</td></tr>
+      <tr><td style="font-family:var(--mono);font-size:11px">XLT-050</td><td>Cubic Urban Mobility</td><td>multi</td><td><span class="st-ns">—</span></td><td>8 hrs</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- COMPETITIVE -->
+<section>
+  <div class="sh-ey">Why us</div>
+  <h2 style="font-size:clamp(20px,3vw,26px);font-weight:600;margin-bottom:6px">What makes this different</h2>
+
+  <div class="comp-grid">
+    <div class="comp-card us">
+      <h3>Traffic Authority</h3>
+      <p>Pre-built translator catalog. Token-based pricing with volume discounts. Same-day activation for ready protocols. New protocols in days. One integration point regardless of state or sensor vendor. Zero code shared — our translators run on our platform.</p>
+    </div>
+    <div class="comp-card them">
+      <h3>The alternative</h3>
+      <p>Custom integration per deployment. Time-and-materials billing with no predictability. Weeks to months per protocol. Different vendor for each state. Code delivered to your infrastructure that you have to maintain, patch, and support forever.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TERRITORY GRID -->
+<section>
+  <div class="sh-ey">Partner territory</div>
+  <h2 style="font-size:clamp(20px,3vw,26px);font-weight:600;margin-bottom:6px">Integrator coverage map</h2>
+  <p style="font-size:15px;color:var(--ink-60);margin-bottom:4px">Which integrators map to which ready protocols today.</p>
+
+  <table class="terr-table">
+    <thead><tr><th>Integrator type</th><th>Primary states</th><th>Protocols ready</th><th>Coverage</th></tr></thead>
+    <tbody>
+      <tr><td><strong>TCS-style (large national)</strong></td><td>TX, FL, GA, TN, CA</td><td class="t-ready">5 of 7 ready</td><td>TX + FL deploy today. GA/TN/CA = 8-10 hr builds.</td></tr>
+      <tr><td><strong>AM Signal (Western US)</strong></td><td>CA, AZ, NV, UT, WA, OR</td><td class="t-ready">2 of 7 ready (NTCIP + Wavetronix)</td><td>NTCIP universal covers most. State-specific = 4-7 hr builds.</td></tr>
+      <tr><td><strong>Regional FL integrator</strong></td><td>FL (FDOT, CFX, MDX)</td><td class="t-ready">4 of 7 ready</td><td>Full Florida coverage today.</td></tr>
+      <tr><td><strong>Any NTCIP partner</strong></td><td>Any state with NTCIP ATMS</td><td class="t-ready">2 of 7 ready</td><td>NTCIP 1209 + Wavetronix = immediate multi-state baseline.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- CTA -->
+<section style="text-align:center;padding:64px 0">
+  <h2 style="font-size:24px;font-weight:600;margin-bottom:10px">Your corridor probably runs one of these.</h2>
+  <p style="font-size:15px;color:var(--ink-60);margin-bottom:24px">If it doesn't, a new protocol build is 25,000 tokens and measured in days.</p>
+  <a href="pricing.html" class="btn btn-primary">See Pricing &amp; Calculator</a>
+</section>
+
+<footer><div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px"><span>Traffic Authority</span><span>© 2026</span></div></footer>
+</div>
+
+<!-- TRACKING -->
+<script>!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonProperties".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);posthog.init('phc_rfXcuJBTeNvL9U2QVe3jCR76nfagETkm69mFZ458bRer',{api_host:'https://us.i.posthog.com',person_profiles:'always'});</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-86S8R140PV"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-86S8R140PV');</script>
+<script>!function(){var reb2b=window.reb2b=window.reb2b||[];if(reb2b.invoked)return;reb2b.invoked=true;reb2b.methods=["identify","collect"];reb2b.factory=function(method){return function(){var args=Array.prototype.slice.call(arguments);args.unshift(method);reb2b.push(args);return reb2b}};for(var i=0;i<reb2b.methods.length;i++){var key=reb2b.methods[i];reb2b[key]=reb2b.factory(key)}reb2b.load=function(key){var script=document.createElement("script");script.type="text/javascript";script.async=true;script.src="https://s3-us-west-2.amazonaws.com/b2bjsstore/b/"+key+"/46DJ4HGGJM61.js";var first=document.getElementsByTagName("script")[0];first.parentNode.insertBefore(script,first)};reb2b.SNIPPET_VERSION="1.0.1";reb2b.load("46DJ4HGGJM61")}();</script>
+</body>
+</html>
