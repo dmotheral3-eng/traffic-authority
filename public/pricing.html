@@ -137,6 +137,8 @@ footer{border-top:1px solid var(--ink-10);padding:32px 0;font-size:12px;color:va
     <a href="index.html" style="font-size:13px;font-weight:500;color:var(--ink-60);text-decoration:none;padding:6px 12px;border-radius:5px">Home</a>
     <a href="platform.html" style="font-size:13px;font-weight:500;color:var(--ink-60);text-decoration:none;padding:6px 12px;border-radius:5px">Platform</a>
     <a href="pricing.html" style="font-size:13px;font-weight:500;color:var(--ink);text-decoration:none;padding:6px 12px;border-radius:5px;background:var(--yellow-dim)">Pricing</a>
+    <a href="simpl.html" style="font-size:13px;font-weight:500;color:var(--ink-60);text-decoration:none;padding:6px 12px;border-radius:5px">For SIMPL</a>
+    <a href="wrongway.html" style="font-size:13px;font-weight:500;color:var(--ink-60);text-decoration:none;padding:6px 12px;border-radius:5px">Wrong-Way</a>
   </div>
 </div></div></nav>
 
@@ -234,7 +236,7 @@ footer{border-top:1px solid var(--ink-10);padding:32px 0;font-size:12px;color:va
     <div class="val-card">
       <div class="vc-label" style="color:var(--green)">The solution</div>
       <h3>Fixed token cost per gantry</h3>
-      <p>2,500 tokens per sensor location. Known before you submit the bid. Protocol translation, activation, platform access, and ongoing data streaming — all drawn from one token balance. You know the number, you carry it in your bid, and it doesn't change.</p>
+      <p>2,500 tokens per sensor location. Known before you submit the bid. Protocol translation, activation, and deployment — all drawn from one token balance, one-time. You know the number, you carry it in your bid, and it doesn't change.</p>
     </div>
     <div class="val-card">
       <div class="vc-label" style="color:var(--blue)">How you win</div>
@@ -415,20 +417,16 @@ footer{border-top:1px solid var(--ink-10);padding:32px 0;font-size:12px;color:va
   <h2 style="font-size:clamp(20px,3vw,26px);font-weight:600;margin-bottom:16px">Calculator</h2>
 
   <div class="calc">
-    <div class="calc-sl">Deployment scope</div>
+    <div class="calc-sl">Deployment scope · one-time</div>
     <div class="calc-inputs">
       <div class="ci"><label>Gantries to deploy</label><div class="ci-hint">2,500 tokens each · one-time</div><input type="number" id="c-gantries" value="24" min="0" max="999" oninput="recalc()"></div>
       <div class="ci"><label>New protocols</label><div class="ci-hint">25,000 tokens each · new state format</div><input type="number" id="c-protocols" value="0" min="0" max="20" oninput="recalc()"></div>
       <div class="ci"><label>Protocol activations</label><div class="ci-hint">2,500 tokens each · existing translator</div><input type="number" id="c-activations" value="1" min="0" max="50" oninput="recalc()"></div>
-    </div>
-    <div class="calc-sl">Annual platform usage</div>
-    <div class="calc-inputs">
-      <div class="ci"><label>Active translator streams</label><div class="ci-hint">50 tokens/mo each</div><input type="number" id="c-streams" value="6" min="0" max="200" oninput="recalc()"></div>
-      <div class="ci"><label>Advisory hours</label><div class="ci-hint">250 tokens/hr</div><input type="number" id="c-advisory" value="10" min="0" max="500" oninput="recalc()"></div>
+      <div class="ci"><label>Advisory / integration hours</label><div class="ci-hint">250 tokens per hour · optional</div><input type="number" id="c-advisory" value="0" min="0" max="500" oninput="recalc()"></div>
     </div>
     <div class="results-strip">
       <div class="rs-card primary"><div class="rs-label">Tokens needed</div><div class="rs-val" id="r-tokens">—</div><div class="rs-note" id="r-breakdown"></div></div>
-      <div class="rs-card secondary"><div class="rs-label">Annual investment</div><div class="rs-val" id="r-price">—</div><div class="rs-note" id="r-rate"></div></div>
+      <div class="rs-card secondary"><div class="rs-label">One-time investment</div><div class="rs-val" id="r-price">—</div><div class="rs-note" id="r-rate"></div></div>
       <div class="rs-card"><div class="rs-label">Cost per gantry</div><div class="rs-val" id="r-pergantry">—</div><div class="rs-note" id="r-pergantry-note"></div></div>
       <div class="rs-card"><div class="rs-label">Effective rate</div><div class="rs-val" id="r-effrate">—</div><div class="rs-note">Per token at this volume</div></div>
     </div>
@@ -449,9 +447,7 @@ footer{border-top:1px solid var(--ink-10);padding:32px 0;font-size:12px;color:va
       <tr class="cat-row"><td colspan="2">Protocol engineering</td></tr>
       <tr><td><strong>New protocol</strong><div class="act-sub">New state-format translator from scratch.</div></td><td>25,000</td></tr>
       <tr><td><strong>Protocol activation</strong><div class="act-sub">Activate existing translator for a new scope.</div></td><td>2,500</td></tr>
-      <tr class="cat-row"><td colspan="2">Platform &amp; advisory</td></tr>
-      <tr><td><strong>Platform access</strong><div class="act-sub">Monitoring, configuration, translator runtime.</div></td><td>1,000 /mo</td></tr>
-      <tr><td><strong>Translator stream</strong><div class="act-sub">Per active instance, continuous data translation.</div></td><td>50 /mo</td></tr>
+      <tr class="cat-row"><td colspan="2">Advisory</td></tr>
       <tr><td><strong>Advisory &amp; pre-bid</strong><div class="act-sub">Spec review, bid architecture, technical advisory.</div></td><td>250 /hr</td></tr>
     </tbody>
   </table>
@@ -536,16 +532,14 @@ function recalc(){
   const g=Math.max(0,parseInt(document.getElementById('c-gantries').value)||0);
   const p=Math.max(0,parseInt(document.getElementById('c-protocols').value)||0);
   const a=Math.max(0,parseInt(document.getElementById('c-activations').value)||0);
-  const s=Math.max(0,parseInt(document.getElementById('c-streams').value)||0);
   const h=Math.max(0,parseInt(document.getElementById('c-advisory').value)||0);
-  const deploy=g*2500,protos=p*25000,activ=a*2500,platform=12*1000,streams=s*50*12,advisory=h*250;
-  const raw=deploy+protos+activ+platform+streams+advisory;
+  const deploy=g*2500,protos=p*25000,activ=a*2500,advisory=h*250;
+  const raw=deploy+protos+activ+advisory;
   const tokens=Math.max(raw,MIN),rate=tierRate(tokens),price=tokens*rate;
   document.getElementById('r-tokens').textContent=tokens.toLocaleString();
   const parts=[];
   if(deploy)parts.push('Deploy '+deploy.toLocaleString());if(protos)parts.push('Proto '+protos.toLocaleString());
-  if(activ)parts.push('Activ '+activ.toLocaleString());parts.push('Platform '+platform.toLocaleString());
-  if(streams)parts.push('Streams '+streams.toLocaleString());if(advisory)parts.push('Advisory '+advisory.toLocaleString());
+  if(activ)parts.push('Activ '+activ.toLocaleString());if(advisory)parts.push('Advisory '+advisory.toLocaleString());
   if(raw<MIN)parts.push('(minimum applied)');
   document.getElementById('r-breakdown').textContent=parts.join(' + ');
   document.getElementById('r-price').textContent=fmt(price);
@@ -563,7 +557,7 @@ recalc();
 </script>
 
 <!-- ═══ TRACKING ═══ -->
-<script>!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonProperties".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);posthog.init('phc_rfXcuJBTeNvL9U2QVe3jCR76nfagETkm69mFZ458bRer',{api_host:'https://us.i.posthog.com',person_profiles:'always'});</script>
+<script>!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId setPersonProperties".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);posthog.init('phc_rfXcuJBTeNvL9U2QVe3jCR76nfagETkm69mFZ458bRer',{api_host:'https://us.i.posthog.com',person_profiles:'always',capture_performance:false,disable_session_recording:false,advanced_disable_toolbar_metrics:true,autocapture:{capture_copied_text:false},loaded:function(ph){if(window.location.search.indexOf('__posthog')===-1){try{ph.toolbar&&ph.toolbar.close&&ph.toolbar.close();}catch(e){}}}});</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-86S8R140PV"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-86S8R140PV');</script>
 <script>!function(){var reb2b=window.reb2b=window.reb2b||[];if(reb2b.invoked)return;reb2b.invoked=true;reb2b.methods=["identify","collect"];reb2b.factory=function(method){return function(){var args=Array.prototype.slice.call(arguments);args.unshift(method);reb2b.push(args);return reb2b}};for(var i=0;i<reb2b.methods.length;i++){var key=reb2b.methods[i];reb2b[key]=reb2b.factory(key)}reb2b.load=function(key){var script=document.createElement("script");script.type="text/javascript";script.async=true;script.src="https://s3-us-west-2.amazonaws.com/b2bjsstore/b/"+key+"/46DJ4HGGJM61.js";var first=document.getElementsByTagName("script")[0];first.parentNode.insertBefore(script,first)};reb2b.SNIPPET_VERSION="1.0.1";reb2b.load("46DJ4HGGJM61")}();</script>
